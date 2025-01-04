@@ -1,6 +1,8 @@
 package com.example.assigment2
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
+import com.example.assigment2.model.Model
+import com.example.assigment2.model.Student
+
 class StudentListViewActivity : AppCompatActivity() {
+
+    var students: MutableList<Student>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,13 +30,14 @@ class StudentListViewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        students= Model.shared.students
         val listView :ListView= findViewById(R.id.stsudents_list_view)
-        listView.adapter= StudentsAdapter()
+        listView.adapter= StudentsAdapter(
+        )
     }
-    class StudentsAdapter(): BaseAdapter(){
-        override fun getCount(): Int {
-            return 10
-        }
+    inner class StudentsAdapter(): BaseAdapter(){
+        override fun getCount(): Int = students?.size?:0
 
         override fun getItem(position: Int): Any {
             return 0
@@ -40,16 +48,35 @@ class StudentListViewActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val inflator= LayoutInflater.from(parent?.context)
-            val view= convertView?: inflator.inflate(R.layout.student_list_row,parent,false)
+            val inflation = LayoutInflater.from(parent?.context)
+            val view = convertView ?: inflation .inflate(
+                R.layout.student_list_row,
+                parent,
+                false
+            ).apply {
+                findViewById<CheckBox>(R.id.sudent_row_check_box).apply {
+                    setOnClickListener { view ->
+                        (tag as? Int)?.let { tag ->
+                            val student = students?.get(tag)
+                            student?.isChecked = (view as? CheckBox)?.isChecked ?: false
+                        }
+                    }
+                }
+            }
 
-            val nameTextView : TextView = view.findViewById(R.id.sudent_row_name_text_view)
-            val idTextView : TextView= view.findViewById(R.id.sudent_row_id_text_view)
-            val checkBoc : CheckBox= view.findViewById(R.id.sudent_row_check_box)
+            val student= students?.get(position)
+            val nameTextView : TextView? = view.findViewById(R.id.sudent_row_name_text_view)
+            val idTextView : TextView?= view.findViewById(R.id.sudent_row_id_text_view)
+            val checkBox : CheckBox?= view.findViewById(R.id.sudent_row_check_box)
+            nameTextView?.text= student?.name
+            idTextView?.text=student?.id
 
-            nameTextView.text= "Ben Cohen"
-            idTextView.text="123456"
-            return view
+            checkBox?.apply {
+                isChecked = student?.isChecked ?: false
+                tag = position
+            }
+
+            return view!!
         }
 
     }
