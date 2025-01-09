@@ -1,5 +1,6 @@
 package com.example.assigment2.adapter
 
+import StudentViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,12 +8,14 @@ import com.example.assigment2.OnItemClickListener
 import com.example.assigment2.R
 import com.example.assigment2.model.Student
 
-class StudentsRecyclerAdapter(private var students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+class StudentsRecyclerAdapter(private var students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
 
     var listener: OnItemClickListener? = null
 
-    fun set(students: List<Student>?) {
+    // Set the data in the adapter
+    fun set(students: MutableList<Student>?) {
         this.students = students
+        notifyDataSetChanged()  // Notify adapter of data change
     }
 
     override fun getItemCount(): Int = students?.size ?: 0

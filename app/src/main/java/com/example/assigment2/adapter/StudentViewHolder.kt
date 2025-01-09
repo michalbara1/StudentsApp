@@ -1,5 +1,3 @@
-package com.example.assigment2.adapter
-
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
@@ -7,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.assigment2.OnItemClickListener
 import com.example.assigment2.R
 import com.example.assigment2.model.Student
-
 
 class StudentViewHolder(
     itemView: View,
@@ -24,11 +21,10 @@ class StudentViewHolder(
         idTextView = itemView.findViewById(R.id.sudent_row_id_text_view)
         checkBox = itemView.findViewById(R.id.sudent_row_check_box)
 
+        // Handle checkbox state change
         checkBox?.apply {
-            setOnClickListener { view ->
-                (tag as? Int)?.let { tag ->
-                    student?.isChecked = (view as? CheckBox)?.isChecked ?: false
-                }
+            setOnCheckedChangeListener { _, isChecked ->
+                student?.isChecked = isChecked // Update the student object with checkbox status
             }
         }
 
@@ -44,7 +40,6 @@ class StudentViewHolder(
         idTextView?.text = student?.id
         checkBox?.apply {
             isChecked = student?.isChecked ?: false
-            tag = position
         }
     }
 }

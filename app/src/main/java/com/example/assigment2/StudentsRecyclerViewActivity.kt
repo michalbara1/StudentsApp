@@ -56,5 +56,4 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
     }
-
 }

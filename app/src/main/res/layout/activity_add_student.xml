@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".AddStudentActivity">
 
+    <!-- Image of the student -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="164dp"
@@ -17,8 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.085"
-        app:srcCompat="@drawable/student" />
+        android:src="@drawable/student" /> <!-- Static image as you mentioned -->
 
+    <!-- Name input field -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -41,6 +43,7 @@
         app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
+    <!-- ID input field -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -64,6 +67,55 @@
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Phone"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/add_student_activity_phone_edit_text"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Address"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/add_student_activity_address_edit_text"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <Button
         android:id="@+id/add_student_activity_save_button"
         android:layout_width="0dp"
@@ -77,6 +129,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
         android:id="@+id/add_student_activity_cancel_button"
         android:layout_width="0dp"
@@ -87,6 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/add_student_activity_save_button" />
+
 
     <TextView
         android:id="@+id/add_student_activity_save_messeage_textView"
