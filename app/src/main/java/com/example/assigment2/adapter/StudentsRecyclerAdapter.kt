@@ -1,28 +1,26 @@
-package com.example.assigment2.adapter
+package com.idz.colman24class2.adapter
 
-import StudentViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assigment2.OnItemClickListener
 import com.example.assigment2.R
 import com.example.assigment2.model.Student
+import com.idz.colman24class2.viewholder.StudentViewHolder
 
-class StudentsRecyclerAdapter(private var students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+class StudentsRecyclerAdapter(private var students: MutableList<Student>?, private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<StudentViewHolder>() {
 
-    var listener: OnItemClickListener? = null
-
-    // Set the data in the adapter
+    // Function to update the list of students and notify the adapter
     fun set(students: MutableList<Student>?) {
         this.students = students
-        notifyDataSetChanged()  // Notify adapter of data change
+        notifyDataSetChanged()  // Notify that the data has changed
     }
 
     override fun getItemCount(): Int = students?.size ?: 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
-        val inflation = LayoutInflater.from(parent.context)
-        val view = inflation.inflate(R.layout.student_list_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.student_list_row, parent, false)
         return StudentViewHolder(view, listener)
     }
 

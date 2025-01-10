@@ -7,7 +7,6 @@
     android:padding="16dp"
     tools:context=".EditStudentActivity">
 
-    <!-- Name EditText -->
     <EditText
         android:id="@+id/student_name_edit_text"
         android:layout_width="0dp"
@@ -18,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ID EditText -->
     <EditText
         android:id="@+id/student_id_edit_text"
         android:layout_width="0dp"
@@ -28,7 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Phone EditText -->
     <EditText
         android:id="@+id/student_phone_edit_text"
         android:layout_width="0dp"
@@ -38,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Address EditText -->
     <EditText
         android:id="@+id/student_address_edit_text"
         android:layout_width="0dp"
@@ -48,7 +44,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Checkbox for 'Checked' status -->
     <CheckBox
         android:id="@+id/student_checked_checkbox"
         android:layout_width="wrap_content"
@@ -57,7 +52,6 @@
         app:layout_constraintTop_toBottomOf="@id/student_address_edit_text"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Save Changes Button -->
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
@@ -67,4 +61,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="saveChanges"/>
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintTop_toBottomOf="@id/save_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="cancelChanges"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

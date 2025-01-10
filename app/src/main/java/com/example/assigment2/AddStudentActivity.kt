@@ -11,16 +11,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.assigment2.model.Model
 import com.example.assigment2.model.Student
 
+
 class AddStudentActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_add_student)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         val saveButton: Button = findViewById(R.id.add_student_activity_save_button)
         val cancelButton: Button = findViewById(R.id.add_student_activity_cancel_button)
@@ -43,17 +39,19 @@ class AddStudentActivity : AppCompatActivity() {
             val address = addressEditText.text.toString()
 
             if (name.isNotEmpty() && id.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty()) {
+                // Create a new student
                 val newStudent = Student(
                     name = name,
                     id = id,
-                    avatarUrl = "default_avatar_url", // Static avatar
+                    avatarUrl = "default_avatar_url",
                     isChecked = false,
                     phone = phone,
                     address = address
                 )
-
                 Model.shared.students.add(newStudent)
+
                 saveMessageTextView.text = "Student: $name (ID: $id) is saved!"
+                setResult(RESULT_OK)
                 finish()
             } else {
                 saveMessageTextView.text = "Please fill in all fields."
