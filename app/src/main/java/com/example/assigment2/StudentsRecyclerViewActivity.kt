@@ -31,11 +31,12 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        // Initialize the adapter
         adapter = StudentsRecyclerAdapter(students, object : OnItemClickListener {
             override fun onItemClick(student: Student?) {
                 val intent = Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java)
                 intent.putExtra("student", student)
-                startActivityForResult(intent, 1) // Using request code 1 for editing
+                startActivityForResult(intent, REQUEST_CODE_EDIT_STUDENT)
             }
         })
 
@@ -44,15 +45,31 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
     fun onAddStudentClick(view: View) {
         val intent = Intent(this, AddStudentActivity::class.java)
-        startActivityForResult(intent, 2)
+        startActivityForResult(intent, REQUEST_CODE_ADD_STUDENT)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == RESULT_OK) {
-            students = Model.shared.students
-            adapter.set(students)
+            if (requestCode == REQUEST_CODE_ADD_STUDENT) {
+                students = Model.shared.students
+                adapter.set(students)
+            } else if (requestCode == REQUEST_CODE_EDIT_STUDENT) {
+                val updatedStudent = data?.getParcelableExtra<Student>("updated_student")
+                updatedStudent?.let {
+                    val index = students?.indexOfFirst { it.id == updatedStudent.id }
+                    index?.let { idx ->
+                        students?.set(idx, updatedStudent)
+                        adapter.notifyItemChanged(idx)
+                    }
+                }
+            }
         }
+    }
+
+    companion object {
+        const val REQUEST_CODE_ADD_STUDENT = 2
+        const val REQUEST_CODE_EDIT_STUDENT = 1
     }
 }

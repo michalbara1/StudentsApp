@@ -64,4 +64,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="onEditStudentClick" />
 
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/button_edit_student"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
