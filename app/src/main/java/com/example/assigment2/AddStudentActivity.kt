@@ -54,6 +54,7 @@ class AddStudentActivity : AppCompatActivity() {
 
                 Model.shared.students.add(newStudent)
                 saveMessageTextView.text = "Student: $name (ID: $id) is saved!"
+                finish()
             } else {
                 saveMessageTextView.text = "Please fill in all fields."
             }

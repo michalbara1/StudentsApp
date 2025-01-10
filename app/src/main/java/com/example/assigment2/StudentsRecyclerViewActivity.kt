@@ -1,5 +1,6 @@
 package com.example.assigment2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import com.example.assigment2.R
 import com.example.assigment2.adapter.StudentsRecyclerAdapter
 import com.example.assigment2.model.Model
 import com.example.assigment2.model.Student
+
 
 interface OnItemClickListener {
     fun onItemClick(position: Int)
@@ -27,13 +29,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_students_recycler_view)
 
-        // Apply window insets to handle the edge-to-edge UI
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         students = Model.shared.students
         Log.d("TAG", "Number of students: ${students?.size ?: 0}")
 
@@ -46,11 +41,14 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         val adapter = StudentsRecyclerAdapter(students)
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Log.d("TAG", "On click Activity listener on position $position")
+                Log.d("TAG", "Item clicked at position: $position")
             }
 
             override fun onItemClick(student: Student?) {
-                Log.d("TAG", "On student clicked name: ${student?.name}")
+                Log.d("TAG", "Student clicked: ${student?.name}")
+                val intent = Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java)
+                intent.putExtra("student", student) // Pass the student object
+                startActivity(intent)
             }
         }
 
